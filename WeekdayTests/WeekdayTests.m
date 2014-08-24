@@ -6,29 +6,44 @@
 //  Copyright (c) 2014 RaeDoc. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "Specta.h"
+#define EXP_SHORTHAND
+#import "Expecta.h"
+#import "RDViewController.h"
+#import "OCMock.h"
 
-@interface WeekdayTests : XCTestCase
+SpecBegin(RDViewController)
 
-@end
+describe(@"saveInfo:", ^{
+    __block RDViewController *viewController = nil;
+    __block id mockTextField = nil;
+    __block NSUserDefaults *defaults = nil;
+    
+    beforeEach(^{
+        viewController = [[RDViewController alloc] init];
+        mockTextField = OCMClassMock([UITextField class]);
+        defaults = [NSUserDefaults standardUserDefaults];
+    });
+    
+    it(@"stores commuter work address", ^{
+        viewController.workAddress = mockTextField;
+        OCMStub([mockTextField text]).andReturn(@"100 Pine Street, San Francisco, CA");
+        [viewController saveInfo:nil];
+        expect([defaults objectForKey:@"workAddress"]).to.equal(@"100 Pine Street, San Francisco, CA");
+    });
+    
+    it(@"stores commuter standup time", ^{
+        viewController.standupTime = mockTextField;
+        OCMStub([mockTextField text]).andReturn(@"9:00 AM");
+        [viewController saveInfo:nil];
+        expect([defaults objectForKey:@"standupTime"]).to.equal(@"9:00 AM");
+    });
+    
+    afterEach(^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"workAddress"];
+        [defaults removeObjectForKey:@"standupTime"];
+    });
+});
 
-@implementation WeekdayTests
-
-- (void)setUp
-{
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown
-{
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
-
-@end
+SpecEnd

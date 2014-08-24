@@ -14,16 +14,11 @@
 
 @implementation RDViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)saveInfo:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.workAddress.text forKey:@"workAddress"];
+    [defaults setObject:self.standupTime.text forKey:@"standupTime"];
+    [defaults synchronize];
 }
 
 @end
