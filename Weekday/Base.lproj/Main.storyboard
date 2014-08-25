@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eWK-Vh-HQo">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="bbq-Sc-Vy2">
+            <objects>
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="h1H-nh-GD4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dkl-5h-0CU">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="iIf-oS-FQy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZMx-0g-Nca" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-160" y="123"/>
+        </scene>
+        <!--Commuter Info View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="RDViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="RDCommuterInfoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -61,13 +76,38 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98431378602981567" green="0.47843140363693237" blue="0.45490199327468872" alpha="1" colorSpace="deviceRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="y41-Vh-Dcv"/>
                     <connections>
                         <outlet property="standupTime" destination="SLJ-dI-CfK" id="clo-nR-wYJ"/>
                         <outlet property="workAddress" destination="pX8-VO-kK2" id="Ybe-0I-V6a"/>
+                        <segue destination="eWK-Vh-HQo" kind="push" identifier="switchToWaterfall" id="w4L-lI-CJ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="274" y="123"/>
+        </scene>
+        <!--Waterfall View Controller-->
+        <scene sceneID="EZb-MA-IxN">
+            <objects>
+                <viewController id="eWK-Vh-HQo" customClass="RDWaterfallViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FyY-Gc-eI9"/>
+                        <viewControllerLayoutGuide type="bottom" id="mIs-is-JGo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8fB-QM-7MU" customClass="RDWaterfall">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <accessibility key="accessibilityConfiguration" label="Waterfall">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                    </view>
+                    <navigationItem key="navigationItem" id="GYS-mI-J8R"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iQ7-T6-qHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="698" y="123"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

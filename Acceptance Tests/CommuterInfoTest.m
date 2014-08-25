@@ -12,6 +12,8 @@ describe(@"Commuter information", ^{
                 intoViewWithAccessibilityLabel:@"Standup Time"];
 
         [tester tapViewWithAccessibilityLabel:@"Save"];
+        
+        [tester waitForViewWithAccessibilityLabel:@"Waterfall"];
     });
 
     afterEach(^{

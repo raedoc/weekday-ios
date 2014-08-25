@@ -9,18 +9,19 @@
 #import "Specta.h"
 #define EXP_SHORTHAND
 #import "Expecta.h"
-#import "RDViewController.h"
+#import "RDCommuterInfoViewController.h"
 #import "OCMock.h"
 
-SpecBegin(RDViewController)
+SpecBegin(RDCommuterInfoViewController)
 
 describe(@"saveInfo:", ^{
-    __block RDViewController *viewController = nil;
+    __block RDCommuterInfoViewController *viewController = nil;
     __block id mockTextField = nil;
     __block NSUserDefaults *defaults = nil;
     
     beforeEach(^{
-        viewController = [[RDViewController alloc] init];
+        viewController = OCMPartialMock([[RDCommuterInfoViewController alloc] init]);
+        OCMStub([viewController performSegueWithIdentifier:@"switchToWaterfall" sender:[OCMArg any]]);
         mockTextField = OCMClassMock([UITextField class]);
         defaults = [NSUserDefaults standardUserDefaults];
     });
@@ -37,6 +38,11 @@ describe(@"saveInfo:", ^{
         OCMStub([mockTextField text]).andReturn(@"9:00 AM");
         [viewController saveInfo:nil];
         expect([defaults objectForKey:@"standupTime"]).to.equal(@"9:00 AM");
+    });
+    
+    it(@"redirects to the RDWaterfallViewContoller", ^{
+        [viewController saveInfo:nil];
+        OCMVerify([viewController performSegueWithIdentifier:@"switchToWaterfall" sender:[OCMArg any]]);
     });
     
     afterEach(^{
